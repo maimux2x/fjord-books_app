@@ -28,7 +28,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to @book, notice: t('message.created', item: Book.model_name.human) }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -42,11 +42,9 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
-        format.json { render :show, status: :ok, location: @book }
+        format.html { redirect_to @book, notice: t('message.updated', item: Book.model_name.human) }
       else
         format.html { render :edit }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,8 +54,7 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to books_url, notice: t('message.destroyed', item: Book.model_name.human) }
     end
   end
 

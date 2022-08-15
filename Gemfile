@@ -59,3 +59,8 @@ gem 'net-pop'
 gem 'net-smtp'
 
 gem 'carrierwave'
+
+gem 'i18n_generators'
+gem 'rails-i18n'
+
+gem 'awesome_print'
