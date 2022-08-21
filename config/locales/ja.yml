@@ -35,6 +35,7 @@ ja:
     created: '%{item}を登録しました。'
     updated: '%{item}を更新しました。'
     destroyed: '%{item}を削除しました。'
+    confirmation: 本当に削除してよろしいですか？
   date:
     abbr_day_names:
     - 日
