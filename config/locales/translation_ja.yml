@@ -9,3 +9,10 @@ ja:
         memo: メモ  #g
         picture: 画像  #g
         title: 題名  #g
+      user:
+        name: 名前
+        postal_code: 郵便番号
+        prefecture: 都道府県
+        city: 市区町村
+        area: 番地
+        self_introduction: 自己紹介

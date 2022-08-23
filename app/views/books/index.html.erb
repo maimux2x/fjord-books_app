@@ -32,4 +32,5 @@
 
 <br>
 
-<%= link_to t('views.common.new'), new_book_path %>
+<%= link_to t('views.common.new'), new_book_path %> |
+<%= link_to t('users.index.title', resource: User.model_name.human), users_path %>

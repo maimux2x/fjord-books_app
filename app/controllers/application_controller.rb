@@ -2,4 +2,20 @@
 
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(
+      :sign_up,
+      keys: [
+        :name, :postal_code, :prefecture, :city, :area, :self_introduction
+        ])
+    devise_parameter_sanitizer.permit(
+      :edit_profile,
+      keys: [
+        :name, :postal_code, :prefecture, :city, :area, :self_introduction
+        ])
+  end
 end

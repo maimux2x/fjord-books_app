@@ -34,6 +34,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'awesome_print'
   gem 'erb_lint', require: false
   gem 'faker'
   gem 'i18n_generators'
