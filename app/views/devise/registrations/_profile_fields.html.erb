@@ -17,3 +17,12 @@
   <%= f.label :self_introduction %>
   <%= f.text_area :self_introduction %>
 </div>
+
+<div class="image">
+    <% if user_signed_in? && @user.image.attached? %>
+      <%= image_tag @user.image.variant(resize: "100x100") %>
+    <% else %>
+      <%= f.label :image %>
+      <%= f.file_field :image %><br>
+    <% end %>
+</div>
