@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= User.model_name.human %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= User.human_attribute_name(:name) %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= link_to '詳細', user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @users %>
+
+<br>
+<%= link_to t('views.common.back'), books_path %>
