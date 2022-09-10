@@ -1,5 +1,13 @@
 <h1><%= t('views.common.title_show', name: User.model_name.human) %></h1>
 
+<div>
+  <%= render 'users/count' %>
+</div>
+
+<div>
+  <%= render 'users/follow_button' %>
+</div>
+
 <p>
   <strong><%= User.human_attribute_name(:email) %>:</strong>
   <%= @user.email %>
