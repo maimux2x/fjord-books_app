@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  before_action :set_commentable, only: %i[create edit update destroy]
   before_action :set_comment, only: %i[edit update destroy]
 
   def create
     @comment = @commentable.comments.new(comments_params)
-    if @comment.save
-      flash[:success] = 'Comment created!'
-      redirect_to @commentable
-    else
-      render @commentable
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human) }
+      else
+        format.html { redirect_to @commentable, notice: @comment.errors.full_messages[0] }
+      end
     end
   end
 
