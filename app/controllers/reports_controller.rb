@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
 
   def index
-    @user = current_user
     @reports = Report.order(:id).page(params[:page])
   end
-  
+
   def show
-    @user = current_user
+    @comment = Comment.new
+    @comments = @report.comments
   end
-  
+
   def new
     @report = Report.new
   end
@@ -26,8 +28,7 @@ class ReportsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     respond_to do |format|
@@ -45,7 +46,7 @@ class ReportsController < ApplicationController
       format.html { redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human) }
     end
   end
-  
+
   private
 
   def set_report

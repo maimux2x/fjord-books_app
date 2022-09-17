@@ -20,5 +20,9 @@
   <%= image_tag(@book.picture_url) if @book.picture.present? %>
 </p>
 
+<%= render partial: 'comments/comment_form', locals: {commentable: @book, comment: @comment} %>
+
+<%= render partial: 'comments/comments_feed', locals: {commentable: @book} %>
+<br>
 <%= link_to t('views.common.edit'), edit_book_path(@book) %> |
 <%= link_to t('views.common.back'), books_path %>
