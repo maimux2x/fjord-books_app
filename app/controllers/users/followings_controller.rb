@@ -2,9 +2,8 @@
 
 class Users::FollowingsController < ApplicationController
   def index
-    @title = t('views.users.show_following')
     @user = User.find(params[:user_id])
     @users = @user.following
-    render 'users/show_follow'
+    render 'followings/index'
   end
 end
