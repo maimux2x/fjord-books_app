@@ -19,8 +19,13 @@
 </div>
 
 <div class="image">
-    <% if user_signed_in? && @user.image.attached? %>
-      <%= image_tag @user.image.variant(resize: "100x100") %>
+    <% if user_signed_in? && current_user.image.attached? %>
+      <%= f.label :image %>
+      <%= image_tag current_user.image.variant(resize: "100x100") %>
+      <br>
+      <%= t('views.common.update_icon') %>
+      <br>
+      <%= f.file_field :image %><br>
     <% else %>
       <%= f.label :image %>
       <%= f.file_field :image %><br>
