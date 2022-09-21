@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @users.all.with_attached_image.each do |user| %>
+    <% @users.each do |user| %>
       <tr>
         <td><%= image_tag user.image.variant(resize: "30x30") if user.image.attached? %></td>
         <td><%= user.email %></td>
