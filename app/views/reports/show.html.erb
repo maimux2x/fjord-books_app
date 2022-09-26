@@ -15,7 +15,7 @@
 <%= render partial: 'comments/comments_feed', locals: {commentable: @report} %>
 <br>
 
-<% if current_user.id == @report.user_id %>
+<% if @report.editable?(current_user) %>
   <%= link_to t('views.common.edit'), edit_report_path(@report) %> |
 <% end %>
 <%= link_to t('views.common.back'), reports_path %>

@@ -34,6 +34,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'awesome_print'
   gem 'erb_lint', require: false
   gem 'faker'
   gem 'i18n_generators'
@@ -66,5 +67,3 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'image_processing', '~> 1.2'
 gem 'kaminari'
-
-gem 'awesome_print'

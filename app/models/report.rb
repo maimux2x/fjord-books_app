@@ -5,4 +5,8 @@ class Report < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :title, :description, presence: true
+
+  def editable?(current_user)
+    user_id == current_user.id
+  end
 end

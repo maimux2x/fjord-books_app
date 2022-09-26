@@ -1,38 +1,34 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  prepend_view_path "polymorphic_path(#{@commentable})"
   before_action :set_commentable, only: %i[create edit update destroy]
   before_action :set_comment, only: %i[edit update destroy]
 
   def create
     @comment = @commentable.comments.new(comments_params)
+    @comment.user = current_user
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human) }
-      else
-        format.html { redirect_to @commentable, notice: @comment.errors.full_messages[0] }
-      end
+    if @comment.save
+      redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
+    else
+      render partial: 'comments/comment_form', locals: { commentable: @commentable, comment: @comment }
     end
   end
 
   def edit; end
 
   def update
-    respond_to do |format|
-      if @comment.update(comments_params)
-        format.html { redirect_to @commentable, notice: t('controllers.common.notice_update', name: Comment.model_name.human) }
-      else
-        format.html { render :edit }
-      end
+    if @comment.update(comments_params)
+      redirect_to @commentable, notice: t('controllers.common.notice_update', name: Comment.model_name.human)
+    else
+      render :edit
     end
   end
 
   def destroy
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human) }
-    end
+    redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
 
   private

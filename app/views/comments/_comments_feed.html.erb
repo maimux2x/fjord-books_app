@@ -11,7 +11,7 @@
     </p>
     <p>
       <%= comment.description %>
-      <% if current_user.id == comment.user_id %>
+      <% if comment.editable?(current_user) %>
         <%= link_to t('views.common.edit'), edit_polymorphic_path([commentable, comment]) %>
         <%= link_to t('views.common.destroy'), polymorphic_path([commentable, comment]), method: :delete, data: { confirm: t('views.common.delete_confirm') } %>
       <% end %>
