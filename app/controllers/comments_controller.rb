@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  prepend_view_path "polymorphic_path(#{@commentable})"
   before_action :set_commentable, only: %i[create edit update destroy]
   before_action :set_comment, only: %i[edit update destroy]
 
@@ -12,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
-      render partial: 'comments/comment_form', locals: { commentable: @commentable, comment: @comment }
+      set_comment_form
     end
   end
 
