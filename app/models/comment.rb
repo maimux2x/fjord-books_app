@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
 
   validates :description, presence: true
 
-  def editable?(current_user)
-    user_id == current_user.id
+  def editable?(user)
+    user_id == user.id
   end
 end

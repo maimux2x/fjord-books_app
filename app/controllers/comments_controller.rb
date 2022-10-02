@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
-      set_comment_form
+      render partial: 'comments/comment_form', locals: { commentable: @commentable, comment: @comment }
     end
   end
 

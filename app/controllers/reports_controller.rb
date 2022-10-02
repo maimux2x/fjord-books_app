@@ -2,6 +2,7 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
+  before_action :set_current_user, only: %i[index show]
 
   def index
     @reports = Report.order(:id).page(params[:page])
@@ -45,6 +46,10 @@ class ReportsController < ApplicationController
 
   def set_report
     @report = Report.find(params[:id])
+  end
+
+  def set_current_user
+    @user = current_user
   end
 
   def report_params
