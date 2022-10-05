@@ -29,7 +29,7 @@ class ReportsController < ApplicationController
   def edit; end
 
   def update
-    if @comment.user_id != current_user.id
+    if @report.user_id != current_user.id
       head :forbidden
       return
     end
@@ -42,7 +42,7 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    if @comment.user_id != current_user.id
+    if @report.user_id != current_user.id
       head :forbidden
       return
     end
