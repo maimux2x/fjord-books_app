@@ -26,13 +26,14 @@ class ReportsController < ApplicationController
     end
   end
 
-  def edit
-   unless @report.user_id == current_user.id
-    redirect_to @report, notice: t('controllers.common.permisson_rejected')
-   end
-  end
+  def edit; end
 
   def update
+    if @comment.user_id != current_user.id
+      head :forbidden
+      return
+    end
+
     if @report.update(report_params)
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
@@ -41,7 +42,11 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    return if @report.user_id != current_user.id
+    if @comment.user_id != current_user.id
+      head :forbidden
+      return
+    end
+
     @report.destroy
     redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end

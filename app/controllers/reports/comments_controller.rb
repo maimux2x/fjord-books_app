@@ -12,6 +12,6 @@ class Reports::CommentsController < CommentsController
   end
 
   def show_path
-    "/reports/show"
+    '/reports/show'
   end
 end

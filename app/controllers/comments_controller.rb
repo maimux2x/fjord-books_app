@@ -20,9 +20,10 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.user_id != current_user.id
-      head :forbidden 
+      head :forbidden
       return
     end
+
     if @comment.update(comments_params)
       redirect_to @commentable, notice: t('controllers.common.notice_update', name: Comment.model_name.human)
     else
@@ -32,10 +33,10 @@ class CommentsController < ApplicationController
 
   def destroy
     if @comment.user_id != current_user.id
-      head :forbidden 
+      head :forbidden
       return
     end
-        
+
     @comment.destroy
     redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
