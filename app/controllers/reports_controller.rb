@@ -2,7 +2,6 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
-  before_action :set_current_user, only: %i[index show]
 
   def index
     @reports = Report.order(:id).page(params[:page])
@@ -27,7 +26,11 @@ class ReportsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+   unless @report.user_id == current_user.id
+    redirect_to @report, notice: t('controllers.common.permisson_rejected')
+   end
+  end
 
   def update
     if @report.update(report_params)
@@ -38,6 +41,7 @@ class ReportsController < ApplicationController
   end
 
   def destroy
+    return if @report.user_id != current_user.id
     @report.destroy
     redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
@@ -46,10 +50,6 @@ class ReportsController < ApplicationController
 
   def set_report
     @report = Report.find(params[:id])
-  end
-
-  def set_current_user
-    @user = current_user
   end
 
   def report_params

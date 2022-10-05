@@ -14,7 +14,6 @@ class BooksController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @book.comments
-    @user = current_user
   end
 
   # GET /books/new

@@ -6,4 +6,12 @@ class Books::CommentsController < CommentsController
   def set_commentable
     @commentable = Book.find(params[:book_id])
   end
+  
+  def set_show_resource
+    @book = @commentable
+  end
+  
+  def show_path
+    "/books/show"
+  end
 end

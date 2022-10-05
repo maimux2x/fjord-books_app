@@ -11,13 +11,18 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
-      render partial: 'comments/comment_form', locals: { commentable: @commentable, comment: @comment }
+      set_show_resource
+      render show_path
     end
   end
 
   def edit; end
 
   def update
+    if @comment.user_id != current_user.id
+      head :forbidden 
+      return
+    end
     if @comment.update(comments_params)
       redirect_to @commentable, notice: t('controllers.common.notice_update', name: Comment.model_name.human)
     else
@@ -26,6 +31,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    if @comment.user_id != current_user.id
+      head :forbidden 
+      return
+    end
+        
     @comment.destroy
     redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
