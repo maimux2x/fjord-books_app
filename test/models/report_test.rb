@@ -15,6 +15,6 @@ class ReportTest < ActiveSupport::TestCase
   end
 
   test 'created_at_should_convert_date' do
-    assert @report.created_on
+    assert_equal '2022/10/18', I18n.l(@report.created_on)
   end
 end

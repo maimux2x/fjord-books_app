@@ -17,18 +17,16 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'user_should_follow_otoher_user' do
-    assert_not @user.following?(@other_user)
-    @user.follow(@other_user)
-    assert @user.following?(@other_user)
+    assert_difference '@other_user.followers.count', 1 do
+      @user.follow(@other_user)
+    end
   end
 
   test 'user_should_unfollow_otoher_user' do
-    @user.unfollow(@other_user)
-    assert_not @user.following?(@other_user)
-  end
+    @user.follow(@other_user)
 
-  test 'user_should_be_followed_other_user' do
-    @other_user.follow(@user)
-    assert @user.followed_by?(@other_user)
+    assert_difference '@other_user.followers.count', -1 do
+      @user.unfollow(@other_user)
+    end
   end
 end

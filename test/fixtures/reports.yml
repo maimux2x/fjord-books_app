@@ -4,8 +4,10 @@ one:
   user: alice
   title: alice's report
   content: testtest
+  created_at: <%= Time.new(2022, 10, 9) %> 
 
 two:
   user: bob
   title: bob'report
   content: testtest
+  created_at: <%= Time.new(2022, 10, 18) %> 
