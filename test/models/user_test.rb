@@ -6,6 +6,7 @@ class UserTest < ActiveSupport::TestCase
   def setup
     @user = users(:alice)
     @other_user = users(:bob)
+    @relationshp = relationships(:one)
   end
 
   test 'user_should_have_email_or_name' do
@@ -14,6 +15,16 @@ class UserTest < ActiveSupport::TestCase
 
     test_user.name = 'Test Test'
     assert_equal 'Test Test', test_user.name_or_email
+  end
+
+  test 'following?_should_check_relations' do
+    assert @relationshp.follower.following?(@relationshp.following)
+    assert_not @relationshp.following.following?(@relationshp.follower)
+  end
+
+  test 'followed_by?_should_check_relations' do
+    assert @relationshp.following.followed_by?(@relationshp.follower)
+    assert_not @relationshp.follower.followed_by?(@relationshp.following)
   end
 
   test 'user_should_follow_otoher_user' do
