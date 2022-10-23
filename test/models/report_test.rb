@@ -15,6 +15,9 @@ class ReportTest < ActiveSupport::TestCase
   end
 
   test 'created_at_should_convert_date' do
-    assert_equal '2022/10/18', I18n.l(@report.created_on)
+    travel_to Time.zone.local(2022, 10, 20) do
+      new_report = reports(:two)
+      assert_equal new_report.created_at.to_date, new_report.created_on
+    end
   end
 end
