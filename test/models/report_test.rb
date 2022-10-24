@@ -17,7 +17,6 @@ class ReportTest < ActiveSupport::TestCase
   test 'created_at_should_convert_date' do
     travel_to Time.zone.local(2022, 10, 20) do
       new_report = Report.create(user_id: @user.id, title: 'テスト', content: 'created_atのテスト')
-      pp new_report
       assert_equal Date.new(2022, 10, 20), new_report.created_on
     end
   end
