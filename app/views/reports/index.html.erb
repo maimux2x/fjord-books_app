@@ -1,0 +1,34 @@
+<h1><%= Report.model_name.human %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= Report.human_attribute_name(:created_at) %></th>
+      <th><%= Report.human_attribute_name(:title) %></th>
+      <th><%= Report.human_attribute_name(:description) %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reports.each do |report| %>
+      <tr>
+        <td><%= l report.created_at, format: :long %></td>
+        <td><%= report.title %></td>
+        <td><%= report.description %></td>
+        <td><%= link_to t('views.common.show'), report %></td>
+        <td>
+          <% if report.editable?(current_user) %>
+            <%= link_to t('views.common.edit'), edit_report_path(report) %>
+            <%= link_to t('views.common.destroy'), report, method: :delete, data: { confirm: t('views.common.delete_confirm') } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @reports %>
+
+<br>
+
+<%= link_to t('views.common.new'), new_report_path %>

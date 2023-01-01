@@ -1,0 +1,21 @@
+<% if @comments.blank? %>
+  <p><%= t('comments.message') %></p>
+<% else %>
+  <% @comments.each do |comment| %>
+  <div>
+    <p><%= comment.user.name.blank? ? comment.user.email : comment.user.name %></p>
+  </div>
+  <div>
+    <p>
+      <%= l comment.created_at, format: :long %>
+    </p>
+    <p>
+      <%= comment.description %>
+      <% if comment.editable?(current_user) %>
+        <%= link_to t('views.common.edit'), edit_polymorphic_path([commentable, comment]) %>
+        <%= link_to t('views.common.destroy'), polymorphic_path([commentable, comment]), method: :delete, data: { confirm: t('views.common.delete_confirm') } %>
+      <% end %>
+    </p>
+  </div>
+  <% end %>
+<% end %>
