@@ -1,9 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  memo: MyText
+  title: 本1
+  memo: 本1の感想
+  author: テスト
 
 two:
-  title: MyString
-  memo: MyText
+  title: 本2
+  memo: 本2の感想
+  author: テスト
+
+three:
+  title: 本3
+  memo: 本3の感想
+  author: テスト
