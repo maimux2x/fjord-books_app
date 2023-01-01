@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th><%= t('views.users.follow') %></th>
+      <th><%= t('views.users.follower') %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <%= link_to  @user.following.count, user_followings_path(@user) %>
+      </td>
+      <td>
+        <%= link_to @user.followers.count, user_followers_path(@user) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
